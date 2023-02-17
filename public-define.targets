@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <BaseOutputPath>$(SolutionDir).dist\$(Platform)</BaseOutputPath>
+    <Company>Season Studio</Company>
+    <Authors>Season Studio</Authors>
+    <Copyright>Season Studio 2022. All Rights Reserved.</Copyright>
+    <Product>$(SolutionName)</Product>
+  </PropertyGroup>
+
+</Project>

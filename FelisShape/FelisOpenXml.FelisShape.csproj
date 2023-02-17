@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="$(SolutionDir)public-define.targets" />
+	
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<BaseOutputPath>$(SolutionDir).dist\$(Platform)</BaseOutputPath>
+		<Company>Season Studio</Company>
+		<Authors>Season Studio</Authors>
+		<Copyright>Season Studio 2023. All Rights Reserved.</Copyright>
+		<Product>$(SolutionName)</Product>
+		<VersionPrefix>0.5.7</VersionPrefix>
+	</PropertyGroup>
+	
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RootNamespace>FelisOpenXml.FelisShape</RootNamespace>
+    <PackageLicenseExpression> Apache-2.0</PackageLicenseExpression>
+    <Title>FelisShape</Title>
+    <PackageId>FelisShape</PackageId>
+    <Description>FelisShape is a .NET library for manipulating the presentations which conform to the Office Open XML File Formats specification. It is a cross-platform library base on the Open XML SDK. </Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <None Include="..\README.md" Link="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.19.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
