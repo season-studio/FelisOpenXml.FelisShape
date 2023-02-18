@@ -1,0 +1,2162 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FelisOpenXml.FelisShape</name>
+    </assembly>
+    <members>
+        <member name="T:FelisOpenXml.FelisShape.Base.FelisCompositeElement">
+            <summary>
+            The basic class for the composite element
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.#ctor(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element">The composite element</param>
+            <exception cref="T:System.ArgumentNullException">The input argument is null</exception>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Base.FelisCompositeElement.Element">
+            <summary>
+            The Open Xml Element assigned to this object. Using this member for invoking the API of the OOXML.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.Equals(FelisOpenXml.FelisShape.Base.FelisCompositeElement)">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="other">The other object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.op_Equality(FelisOpenXml.FelisShape.Base.FelisCompositeElement,FelisOpenXml.FelisShape.Base.FelisCompositeElement)">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="_value1">The first object</param>
+            <param name="_value2">The second object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.op_Inequality(FelisOpenXml.FelisShape.Base.FelisCompositeElement,FelisOpenXml.FelisShape.Base.FelisCompositeElement)">
+            <summary>
+            Test the object is not equal to another 
+            </summary>
+            <param name="_value1">The first object</param>
+            <param name="_value2">The second object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.Equals(System.Object)">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="_obj">The other object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisCompositeElement.GetHashCode">
+            <summary>
+            Get the hash code of the object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Base.FelisRootContainer`2">
+            <summary>
+            The basic class for the root element in a part
+            </summary>
+            <typeparam name="TPart"></typeparam>
+            <typeparam name="TRoot"></typeparam>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.SDKPart">
+            <summary>
+            The part containing the root element
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.SDKRootElement">
+            <summary>
+            The root element
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.#ctor(`0,`1)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_part">The part containing the root element</param>
+            <param name="_element">The root element</param>
+            <exception cref="T:System.ArgumentNullException">Any one of the argument is null.</exception>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.Equals(FelisOpenXml.FelisShape.Base.FelisRootContainer{`0,`1})">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="other">The other object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.op_Equality(FelisOpenXml.FelisShape.Base.FelisRootContainer{`0,`1},FelisOpenXml.FelisShape.Base.FelisRootContainer{`0,`1})">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="_value1">The first object</param>
+            <param name="_value2">The second object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.op_Inequality(FelisOpenXml.FelisShape.Base.FelisRootContainer{`0,`1},FelisOpenXml.FelisShape.Base.FelisRootContainer{`0,`1})">
+            <summary>
+            Test the object is not equal to another 
+            </summary>
+            <param name="_value1">The first object</param>
+            <param name="_value2">The second object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.Equals(System.Object)">
+            <summary>
+            Test the object is equal to another 
+            </summary>
+            <param name="_obj">The other object</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Base.FelisRootContainer`2.GetHashCode">
+            <summary>
+            Get the hash code of the object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FSUtilities">
+            <summary>
+            Utilities
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FSUtilities.CopyPart``1(``0,System.Func{``0})">
+            <summary>
+            Copy a part
+            </summary>
+            <typeparam name="T">Special a type of OpenXmlPart</typeparam>
+            <param name="_srcPart">The source part</param>
+            <param name="_fnCreatePart">The function creating an instance of the new part</param>
+            <returns>The new part or null</returns>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FSUtilities.AssignedObjectMap">
+            <summary>
+            Table storing the pairs of the object and the other one assigned to it.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FSUtilities.SingletonAssignObject``1(System.Object,System.Func{System.Object,System.Object})">
+            <summary>
+            Get the object assign to the special source object
+            </summary>
+            <typeparam name="T">Type of the destination object</typeparam>
+            <param name="_src">The source object which is assigned to the result object</param>
+            <param name="_creator">A function for creating a new object assigned to the given source object if there is not existed one.</param>
+            <returns>The object assigned to the special source object or null</returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FSUtilities.SingletonAssignObject(System.Object,System.Func{System.Object,System.Object},System.Type)">
+            <summary>
+            <param name="_src">The source object which is assigned to the result object</param>
+            <param name="_creator">A function for creating a new object assigned to the given source object if there is not existed one.</param>
+            <param name="_targetType">The type of the destination object</param>
+            <returns>The object assigned to the special source object or null</returns>
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisModifiableCollection`3">
+            <summary>
+            The class for modifiable cellection 
+            </summary>
+            <typeparam name="TContainer">The type of the container element</typeparam>
+            <typeparam name="TElement">The type of the children element</typeparam>
+            <typeparam name="TBoxedElement">The type of the children element in the collection, which box the TElement</typeparam>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisModifiableCollection`3.ConrainerElement">
+            <summary>
+            The container element of the items in the collection
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisModifiableCollection`3.collection">
+            <summary>
+            The cache of the collection
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Reload">
+            <summary>
+            Reload the cache of the collection
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Item(System.Int32)">
+            <summary>
+            Get the item by the index
+            </summary>
+            <param name="_index">The index of the target item</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Add(System.Int32)">
+            <summary>
+            Add a new item into the collection
+            </summary>
+            <param name="_position">The position the new item will be inserted at. If the value is less than zero, the postion is located from the end of the collection, and -1 means the last one in the collection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Delete(System.Int32)">
+            <summary>
+            Delete the item in the special index
+            </summary>
+            <param name="_position">The index of the item</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Clear">
+            <summary>
+            Clear all the items in the collection
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisModifiableCollection`3.Count">
+            <summary>
+            Get the count of the items in the collection
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.CreateElement(System.Int32)">
+            <summary>
+            Creating a new open xml element
+            </summary>
+            <param name="_index">The position the new element will be located in.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.BoxingElement(`1)">
+            <summary>
+            Boxing an open xml element into an operating object
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.UnboxingElement(`2)">
+            <summary>
+            Unboxing an open xml element from an operating object
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.GetElements">
+            <summary>
+            List all the items inside the container element
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.ResetIndexOfElements(System.Collections.Generic.IEnumerable{`2},System.Int32)">
+            <summary>
+            Reset the index of the items after the collection is changed
+            </summary>
+            <param name="_list">The list of the items which should be changed</param>
+            <param name="_startIndex">The index of the first item in the list</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.GetEnumerator">
+            <summary>
+            The enumerator of the items in the collection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisModifiableCollection`3.System#Collections#Generic#IEnumerable{TBoxedElement}#GetEnumerator">
+            <summary>
+            The enumerator of the items in the collection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.OpenXmlSDKExtension">
+            <summary>
+            The extension functions for Open XML SDK
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.OpenXmlSDKExtension.ForceGetChild``1(DocumentFormat.OpenXml.OpenXmlElement,System.Func{``0})">
+            <summary>
+            Get child element inside a special Open XML Element.
+            If the target element is not existed, a new one will be create and append to the end of tree of the special element
+            </summary>
+            <typeparam name="T">The type of the result element</typeparam>
+            <param name="_parent">The special element containing the target element</param>
+            <param name="_fnCreateor">The customer function for creating a new target element</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.OpenXmlSDKExtension.GetFirstChild(DocumentFormat.OpenXml.OpenXmlElement,System.Func{DocumentFormat.OpenXml.OpenXmlElement,System.Boolean})">
+            <summary>
+            Get the first child filtered by the checker
+            </summary>
+            <param name="_element"></param>
+            <param name="_fnChecker"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.OpenXmlSDKExtension.Children(DocumentFormat.OpenXml.OpenXmlElement,System.Func{DocumentFormat.OpenXml.OpenXmlElement,System.Boolean})">
+            <summary>
+            Get the children filtered by the checker
+            </summary>
+            <param name="_element"></param>
+            <param name="_fnChecker"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.OpenXmlSDKExtension.RemoveAllChildren(DocumentFormat.OpenXml.OpenXmlElement,System.Func{DocumentFormat.OpenXml.OpenXmlElement,System.Boolean})">
+            <summary>
+            Remove all the children filtered by the checker
+            </summary>
+            <param name="_element"></param>
+            <param name="_fnChecker"></param>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisUnderlingElement">
+            <summary>
+            The base class for the element contained in another.
+            This class is used for the element which's container may not be connected to the DOM, or for the element which have no specially type.
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisUnderlingElement.workElement">
+            <summary>
+            The element this object manipulates
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisUnderlingElement.Submitter">
+            <summary>
+            The action invoked after changing the element
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisUnderlingElement.#ctor(DocumentFormat.OpenXml.OpenXmlCompositeElement,System.Action{System.Object})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_container">The element containing the working element for this object maipulating.</param>
+            <param name="_submitter">The action invoked after changing the element</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisUnderlingElement.ContainerElement">
+            <summary>
+            The element of the container. It is as the same as the Element property.
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisUnderlingElement.WorkElement">
+            <summary>
+            The element of the working element for the target information of this object.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisUnderlingElement.Reload">
+            <summary>
+            Reload the working element
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisUnderlingElement.Submit">
+            <summary>
+            Submit the changing of the information contained in this object
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisAsBackgroundFill">
+            <summary>
+            Fill as the background of the slide
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisAsBackgroundFill.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisAsBackgroundFill.SDKElementType">
+            <summary>
+            Invalid member of this object
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisAsBackgroundFill.Element">
+            <summary>
+            Invalid member of this object
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1">
+            <summary>
+            The basic class of the blip element
+            </summary>
+            <typeparam name="T">The type of the blip element</typeparam>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1.#ctor(`0)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element">The blip element</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1.Stretch">
+            <summary>
+            Get the stretch object
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1.SourceDisplacement">
+            <summary>
+            Get the displacement of the source
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1.CopyTo(System.Object)">
+            <summary>
+            Get the data of the image
+            </summary>
+            <param name="_buffer">The buffer to receive the data. This argument can be a stream or an array of byte.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisBlipBase`1.Set(System.Object,System.String)">
+            <summary>
+            Set a new image to this blip
+            </summary>
+            <param name="_source">The buffer containing the image. This argument can be a stream or an array of byte</param>
+            <param name="_type">The type of the image. Such as "Bmp", "Png", and so on.</param>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1">
+            <summary>
+            The class for operating the relative displacement
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.RectElement">
+            <summary>
+            The element containing the rectangle's information
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Left">
+            <summary>
+            Left
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Right">
+            <summary>
+            Right
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Top">
+            <summary>
+            Top
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Bottom">
+            <summary>
+            Bottom
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Clear">
+            <summary>
+            Clear all the setting of the displacement
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisRelativeRect`1.Delete">
+            <summary>
+            Remove the element from it's parent.
+            This is a danger operating. After invoking this method, all the changing of the displacement have no effect in the shape.
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisBlipFillValue">
+            <summary>
+            Fill by the blip resource 
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisBlipFillValue.#ctor">
+            <summary>
+            Create a empty blip fill object
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisBlipFillValue.SDKElementType">
+            <summary>
+            The type of the blip element assigned to this object
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisColor">
+            <summary>
+            The color class for the shape, text, etc.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.#ctor(DocumentFormat.OpenXml.OpenXmlCompositeElement,System.Action{System.Object})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_container">The element containing the color element</param>
+            <param name="_submitter">The action invoked after changing.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.Reload">
+            <summary>
+            Reload the color element
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisColor.Value">
+            <summary>
+            The RGB value of the color
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.SetAsHSL(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Set the color by HSL format
+            </summary>
+            <param name="_h"></param>
+            <param name="_s"></param>
+            <param name="_l"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.SetAsScheme(DocumentFormat.OpenXml.Drawing.SchemeColorValues)">
+            <summary>
+            Set the color to use the scheme
+            </summary>
+            <param name="_color"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.Clear">
+            <summary>
+            Clear the color
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisColor.HasDefined">
+            <summary>
+            Check if the color value is defined.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.Create(DocumentFormat.OpenXml.OpenXmlCompositeElement,System.Action{System.Object})">
+            <summary>
+            Create an instance of the color object
+            </summary>
+            <param name="_container">The element which contains the color element</param>
+            <param name="_fnSubmit">Action on submitting the changings. It is often used to add the new container into the DOM tree.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.GetColorElement(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the color element in the special container
+            </summary>
+            <param name="_element">The element of the container</param>
+            <returns></returns>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Draw.FelisColor.FallbackColor">
+            <summary>
+            The fallback value of the color.
+            It is used when some exception raised.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.ConvertToColor(DocumentFormat.OpenXml.OpenXmlElement,System.Boolean)">
+            <summary>
+            Convert the value in a special color element to the type of Color
+            </summary>
+            <param name="_colorElement">The special color element</param>
+            <param name="_disableScheme">True for forbidden searching the color scheme.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.AdjustColor(DocumentFormat.OpenXml.OpenXmlElement,System.Drawing.Color)">
+            <summary>
+            Adjust the color according to the information conatined in the child element of the color element
+            </summary>
+            <param name="_colorElement">The color element</param>
+            <param name="_color">The origin color</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.GetColorMap(DocumentFormat.OpenXml.Packaging.SlidePart)">
+            <summary>
+            Get the color map of the given slide
+            </summary>
+            <param name="_slidePart">The part of the special slide</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.ConvertToColorFromScheme(DocumentFormat.OpenXml.Drawing.SchemeColor)">
+            <summary>
+            Convert a scheme color to the type of Color
+            </summary>
+            <param name="_element">The element of the color as the scheme format</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.ConvertToColorFromHSL(DocumentFormat.OpenXml.Drawing.HslColor)">
+            <summary>
+            Convert the HSL color to the type of Color
+            </summary>
+            <param name="_element">The element of the color as the HSL format</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.ConvertToColorFromRGBPortion(DocumentFormat.OpenXml.Drawing.RgbColorModelPercentage)">
+            <summary>
+            Convert the RGB portion values to color
+            </summary>
+            <param name="_element">The element containing the RGB portions</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisColor.ConvertToColorFromRGBHex(DocumentFormat.OpenXml.Drawing.RgbColorModelHex)">
+            <summary>
+            Convert the RGB value written by hex string o the color 
+            </summary>
+            <param name="_element">The element containing the RGB value written by hex string</param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisFill">
+            <summary>
+            The fill class for the shape
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisFill.Reload">
+            <summary>
+            Reload the fill element
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisFill.Value">
+            <summary>
+            The fill's value
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisFill.GetFillValueElement(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the supported element of the fill for the given element
+            </summary>
+            <param name="_parentElement">The special element containing the fill</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisFill.GetFillValueObject(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Convert the fill element to the IFelisFillValue instance
+            </summary>
+            <param name="_element">The element of the fill</param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisGradientFillValue">
+            <summary>
+            Fill by gradient colors
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisGradientFillValue.#ctor">
+            <summary>
+            Create an empty gradient fill
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisGradientFillValue.SDKElementType">
+            <summary>
+            The type of the fill element
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisPatternFillValue">
+            <summary>
+            Fill by pattern
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisPatternFillValue.#ctor">
+            <summary>
+            Create an empty pattern fill
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisPatternFillValue.SDKElementType">
+            <summary>
+            The type of the fill element
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.FelisSolidFillValue">
+            <summary>
+            Fill by solid color
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Draw.FelisSolidFillValue.#ctor">
+            <summary>
+            Create an empty solid fill
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisSolidFillValue.SDKElementType">
+            <summary>
+            The type of the fill element
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.FelisSolidFillValue.Color">
+            <summary>
+            The color of the fill
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Draw.IFelisFillValue">
+            <summary>
+            Interface of the fill's value
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.IFelisFillValue.Element">
+            <summary>
+            The fill element in Open XML SDK
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Draw.IFelisFillValue.SDKElementType">
+            <summary>
+            The type of the fill element in Open XML SDK
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisPresentation">
+            <summary>
+            The class of the presentation
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisPresentation.SDKDocument">
+            <summary>
+            The document of the presentation
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisPresentation.DocumentStream">
+            <summary>
+            The stream assigned to the document
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisPresentation.SDKPart">
+            <summary>
+            The part of the presentation
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisPresentation.SDKRootElement">
+            <summary>
+            The root element of the presentation
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisPresentation.masterPartCopiedRecord">
+            <summary>
+            Record the marster part copied from any other presentation
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.#ctor(System.IO.Stream)">
+            <summary>
+            Create a presentation by loading the data from the given stream
+            </summary>
+            <param name="_sourceStream">The stream containing the source data.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.#ctor(System.Action{FelisOpenXml.FelisShape.FelisPresentation})">
+            <summary>
+            Create an empty presentation
+            </summary>
+            <param name="_fnCustomInit">The action for initializing the empty presentation. The default action will be taken when this argument is null.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Finalize">
+            <summary>
+            Finalize
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.InitializePresentaionFromOther(FelisOpenXml.FelisShape.FelisPresentation,FelisOpenXml.FelisShape.FelisPresentation)">
+            <summary>
+            Initialize a presentation from an other presentation.
+            This function can be used when constructing the presentation.
+            </summary>
+            <param name="_target"></param>
+            <param name="_template"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.From(FelisOpenXml.FelisShape.FelisPresentation)">
+            <summary>
+            Create a empty presentation taking an existed presentaion as the template
+            </summary>
+            <param name="_template"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Save(System.IO.Stream)">
+            <summary>
+            Save the presentation
+            </summary>
+            <param name="_stream">The destination stream for saving the presentation. The origin stream of the document will be taken as the default if this argument is null.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Save(System.String)">
+            <summary>
+            Save the presentation to a file with the special file name
+            </summary>
+            <param name="_filePath"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Close">
+            <summary>
+            Close the presentation
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Dispose">
+            <summary>
+            Disposing the resource
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.Dispose(System.Boolean)">
+            <summary>
+            Disposing the resource
+            </summary>
+            <param name="_isDispose"></param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisPresentation.Slides">
+            <summary>
+            Get an enumerator for all the slides contained in this presentation
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.InsertSlide(FelisOpenXml.FelisShape.FelisSlide,System.Int32)">
+            <summary>
+            Insert a existed slide into the presentation
+            </summary>
+            <param name="_sourceSlide"></param>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPresentation.RemoveSlide(FelisOpenXml.FelisShape.FelisSlide)">
+            <summary>
+            Delete an existed slide in the presentation
+            </summary>
+            <param name="_slide"></param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisPresentation.Writable">
+            <summary>
+            Check if the presentaion is writable
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisSlide">
+            <summary>
+            The class of the slide
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisSlide.Presentation">
+            <summary>
+            The presentation which contains this slide
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.#ctor(FelisOpenXml.FelisShape.FelisPresentation,DocumentFormat.OpenXml.Packaging.SlidePart)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_presentation">The presentation which contains this slide</param>
+            <param name="_part">The part of the slide</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.From(FelisOpenXml.FelisShape.FelisPresentation,DocumentFormat.OpenXml.Packaging.SlidePart)">
+            <summary>
+            Create a new instance or get an existed instance of the slide
+            </summary>
+            <param name="_presentation">The presentation which contains the slide</param>
+            <param name="_part">The part of the slide</param>
+            <returns></returns>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisSlide.HasShapes">
+            <summary>
+            Check if there is any shape in the slide
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisSlide.Shapes">
+            <summary>
+            Get an iterator of the shapes in the slide
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.Submit">
+            <summary>
+            Submit all the changing in the slide
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.Remove">
+            <summary>
+            Remove the slide
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisSlide.CustomerDataParts">
+            <summary>
+            Get an iterator of the customer data parts assigned to the slide
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.AddCustomerData(System.Func{DocumentFormat.OpenXml.Packaging.OpenXmlPart,System.Boolean})">
+            <summary>
+            Add a new customer data part assigned to the slide
+            </summary>
+            <param name="_fnInit">The function for initializing the customer data</param>
+            <returns>The instance of the new customer data part.</returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.RemoveCustomDataPart(DocumentFormat.OpenXml.Packaging.OpenXmlPart)">
+            <summary>
+            Delete a special custom data part
+            </summary>
+            <param name="_part"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.CheckHasCustomerData(System.String)">
+            <summary>
+            Check if there is a customer data with the special id in the slide
+            </summary>
+            <param name="_id">The special id of the customer data</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.RemoveCustomerData(System.String)">
+            <summary>
+            Remove a customer data with the special id in the slide
+            </summary>
+            <param name="_id">The special id of the customer data</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.WorkWithCustomerData(System.String,System.Func{System.Xml.XmlDocument,System.Boolean},System.Boolean)">
+            <summary>
+            Work with the customer data with the special id in the slide
+            </summary>
+            <param name="_id">The special id of the customer data</param>
+            <param name="_fn">The action for working with the customer data. This action return true for saving the changings in the customer data.</param>
+            <param name="_forceOne">Set true for create a temp data if the special data is not existed.</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisSlide.Writable">
+            <summary>
+            Check if the slide is in a writable presentation
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.RetrospectToSlideElement(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the slide element which contains the given element.
+            This function will not create a slide element if there is not an existed one.
+            </summary>
+            <param name="_element">The given element which should be contained in the target slide</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.RetrospectToSlide(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the slide object which contains the given element.
+            This function will not create a slide if there is not an existed one.
+            </summary>
+            <param name="_element">The given element which should be contained in the target slide</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.GetThemeScheme``1(System.Boolean)">
+            <summary>
+            Get a special scheme in this slide
+            </summary>
+            <typeparam name="T">The tyep of the special scheme</typeparam>
+            <param name="_skipSlide">Set true to scan the layout as the beginning instead of the slide</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisSlide.GetThemeScheme``1(System.Func{``0,System.Boolean})">
+            <summary>
+            The a special scheme assigned to this slide
+            </summary>
+            <typeparam name="T">The type of the target scheme</typeparam>
+            <param name="_fnFilter">The filter for checking the scheme</param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChart">
+            <summary>
+            The chart shape
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChart.ChartPart">
+            <summary>
+            The part of the chart
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChart.ChartSpace">
+            <summary>
+            The space element of the root of the part
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChart.ChartElement">
+            <summary>
+            The element of the chart
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChart.#ctor(DocumentFormat.OpenXml.Presentation.GraphicFrame)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element">The graphic element using the chart</param>
+            <exception cref="T:DocumentFormat.OpenXml.Packaging.OpenXmlPackageException"></exception>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChart.ForceGetChartElement(DocumentFormat.OpenXml.Drawing.Charts.ChartSpace)">
+            <summary>
+            Get the chart element in the chart
+            A new bar chart will be created if there is no existed chart element
+            </summary>
+            <param name="_chartSpace">The chart space element which contains the chart element</param>
+            <returns></returns>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChart.seriesCollection">
+            <summary>
+            The cache of the collection of the series.
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChart.SeriesCollection">
+            <summary>
+            The collection of the series in the chart
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChart.PrimaryCategories">
+            <summary>
+            The categories of the chart.
+            This value is taken as the categories declared in the first series of the chart
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChart.Title">
+            <summary>
+            The title of the chart
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChart.Submit">
+            <summary>
+            Submit the changeing of the chart
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartSeries">
+            <summary>
+            The class for operating the series of the data
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartSeries.Title">
+            <summary>
+            The title of the series
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartSeries.Index">
+            <summary>
+            The index of the series in the chart
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartSeries.Categories">
+            <summary>
+            Get the categories of this series
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartSeries.Values">
+            <summary>
+            Get the values of this series
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeries.RemoveDataReference">
+            <summary>
+            Remove the reference information of the series
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartSeriesCollection">
+            <summary>
+            The collection of the series in the chart
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeriesCollection.BoxingElement(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Boxing the series element to series object
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeriesCollection.CreateElement(System.Int32)">
+            <summary>
+            Create a new series element
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+            <exception cref="T:System.Exception">The template is error</exception>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeriesCollection.UnboxingElement(FelisOpenXml.FelisShape.FelisChartSeries)">
+            <summary>
+            Unboxing the series object to series element
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeriesCollection.GetElements">
+            <summary>
+            Get an iterator of the series in the chart
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartSeriesCollection.ResetIndexOfElements(System.Collections.Generic.IEnumerable{FelisOpenXml.FelisShape.FelisChartSeries},System.Int32)">
+            <summary>
+            Reset the index of the series after some one is add or delete from the collection
+            </summary>
+            <param name="_list"></param>
+            <param name="_startIndex"></param>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartDataReferance">
+            <summary>
+            The basic class for manipulating the element of the reference, such as C.DataReference, C.StringReference
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChartDataReferance.ReferenceElement">
+            <summary>
+            The SDK element of the reference
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.#ctor(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_refElement"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.CheckIsCache(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the input element is the typeof the data cache
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.CheckIsPointer(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the input element is the typeof the data point
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.CreatePointer">
+            <summary>
+            Create a new data point element
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChartDataReferance.valuesCache">
+            <summary>
+            The cache of the values
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.ValuesCacheLoader">
+            <summary>
+            The loader for the values
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.ReloadCache">
+            <summary>
+            Reload the cache of the values
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.GetPointIndex(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the index value in the data point
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.SetPointIndex(DocumentFormat.OpenXml.OpenXmlElement,System.UInt32)">
+            <summary>
+            Set the index of a data point
+            </summary>
+            <param name="_element"></param>
+            <param name="_index"></param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartDataReferance.Values">
+            <summary>
+            Get the values
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartDataReferance.ValuesCount">
+            <summary>
+            Get the count of the values
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartDataReferance.Item(System.Int32)">
+            <summary>
+            Get or set the value in the special index
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.ReWrite(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Rewrite all the values. 
+            This method can change the count of the values
+            </summary>
+            <param name="_values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.ReWrite(System.Object[])">
+            <summary>
+            Rewrite all the values. 
+            This method can change the count of the values
+            </summary>
+            <param name="_values"></param>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChartDataReferance.DefaultFormat">
+            <summary>
+            The default format of the value
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartDataReferance.Format">
+            <summary>
+            Get or set the format of the value
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartDataReferance.DataReference">
+            <summary>
+            Get or set the reference of the data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.RemoveReference">
+            <summary>
+            Remove the reference of the data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartDataReferance.SetUnknownReference(System.String,System.String)">
+            <summary>
+            Set the reference to unknown
+            </summary>
+            <param name="_start">The loaction of the start data</param>
+            <param name="_end">The location of the end data</param>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartNumberReference">
+            <summary>
+            The class for manipulating the values of the numeric data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartNumberReference.ReWrite(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Rewrite all the values
+            </summary>
+            <param name="_values"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartNumberReference.CheckIsCache(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the element is the cache
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartNumberReference.CheckIsPointer(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the element is the point
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartNumberReference.CreatePointer">
+            <summary>
+            Create a new data point
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartStringReference">
+            <summary>
+            The class for manipulating the values of the string data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartStringReference.CheckIsCache(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the element is the cache
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartStringReference.CheckIsPointer(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Check if the element is the point
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartStringReference.CreatePointer">
+            <summary>
+            Create a new data point
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartValues">
+            <summary>
+            The class for manipulating the valuse of the chart
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChartValues.ValuesElement">
+            <summary>
+            The element of the values' container
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisChartCategories">
+            <summary>
+            The class fot manipulating the categories of the chart
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisChartCategories.CategoryElement">
+            <summary>
+            The element of the categories' container
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartCategories.Reload">
+            <summary>
+            Reload the data of the categories
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartCategories.Values">
+            <summary>
+            Get the values of the categories
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartCategories.Item(System.Int32)">
+            <summary>
+            Get or set the value of the category in the special index
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartCategories.ReWrite(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Rewrite all the value of the categories
+            </summary>
+            <param name="_values"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartCategories.ReWrite(System.Object[])">
+            <summary>
+            Rewrite all the value of the categories
+            </summary>
+            <param name="_values"></param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartCategories.DataReference">
+            <summary>
+            Get or set the reference of the data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartCategories.RemoveReference">
+            <summary>
+            Remove the reference of the data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisChartCategories.SetUnknownReference(System.String,System.String)">
+            <summary>
+            Set the reference to unknown
+            </summary>
+            <param name="_start">The loaction of the start data</param>
+            <param name="_end">The location of the end data</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisChartCategories.Format">
+            <summary>
+            Get or set the format of the categories' data 
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisConnectionShape">
+            <summary>
+            The connection shape
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisGraphicFrameAttribute">
+            <summary>
+            Attribute for discribe the sub class of the FelisGraphicFrame
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisGraphicFrame">
+            <summary>
+            The base class of the graphic frame shape
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisGraphicFrame.#ctor(DocumentFormat.OpenXml.Presentation.GraphicFrame)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element">The graphic frame element</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisGraphicFrame.ForceGraphicData">
+            <summary>
+            Get the graphic data.
+            An empty one will be created if there is no existed one.
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisUnknownGraphicFrame">
+            <summary>
+            The class for unknown graphic frame shape
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisOleObject">
+            <summary>
+            The OLE object shape
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisPicture">
+            <summary>
+            The picture shape class
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisPicture.Stretch">
+            <summary>
+            Get the stretch object
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisPicture.SourceDisplacement">
+            <summary>
+            Get the displacement of the source
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPicture.CopyTo(System.Object)">
+            <summary>
+            Get the data of the image
+            </summary>
+            <param name="_buffer">The buffer to receive the data. This argument can be a stream or an array of byte.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisPicture.Set(System.Object,System.String)">
+            <summary>
+            Set a new image to this blip
+            </summary>
+            <param name="_source">The buffer containing the image. This argument can be a stream or an array of byte</param>
+            <param name="_type">The type of the image. Such as "Bmp", "Png", and so on.</param>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisPictureBlip">
+            <summary>
+            The class for p:blipFill element
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisShapeRect">
+            <summary>
+            The information of the shape's rect
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisShapeRect.x">
+            <summary>
+            x
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisShapeRect.y">
+            <summary>
+            y
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisShapeRect.cx">
+            <summary>
+            cx
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisShapeRect.cy">
+            <summary>
+            cy
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisShape">
+            <summary>
+            The class of the basic shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.NonVisualDrawingPropertiesSafe">
+            <summary>
+            Get the non-visualable drawing properties element of the shape.
+            A empty one will be created if there is no object contained in the shape.
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.NonVisualDrawingProperties">
+            <summary>
+            Get the non-visualable drawing properties element of the shape.
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.NonVisualProperties">
+            <summary>
+            Get the non-visualable properties element of the shape
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.GetPropertiesElement(System.Boolean)">
+            <summary>
+            Get the properties element of the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Id">
+            <summary>
+            The ID of the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Name">
+            <summary>
+            The name of the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.IsPlaceHolder">
+            <summary>
+            Check if this shape is a place holder
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.PlaceHolderType">
+            <summary>
+            Get the type of the place holder
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.PlaceHolderTypeText">
+            <summary>
+            Get the type of the place holder in text format
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.PlaceHolderShape">
+            <summary>
+            Get the shape of the place holder
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.GetXFrm(DocumentFormat.OpenXml.OpenXmlCompositeElement,System.Boolean)">
+            <summary>
+            Get the a:xfrm or p:xfrm from a element
+            </summary>
+            <param name="_element"></param>
+            <param name="_force"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.GetXFrm(System.Boolean)">
+            <summary>
+            Get the a:xfrm or p:xfrm object
+            </summary>
+            <param name="_force">set true to create a empty one if there is not an existed one.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Rect">
+            <summary>
+            The rect parameter of the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.RelativeRect">
+            <summary>
+            The rect parameter of the shape relative to the parent tree
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Parent">
+            <summary>
+            Get the parent shape containing this shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Slide">
+            <summary>
+            The slide which contains this shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.HasTextBody">
+            <summary>
+            Check if the shape contains text body
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.HasTextContent">
+            <summary>
+            Check if the shape contains text content
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.TextBody">
+            <summary>
+            Get the text body in the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShape.Fill">
+            <summary>
+            Get the fill of the shape
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.LoadShapeClassMap">
+            <summary>
+            Load the declared description attributes in this assembly
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.IsShapeElement(System.Object)">
+            <summary>
+            Check is the input element is a shape element
+            </summary>
+            <param name="_shapeElement"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.CreateInstance(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Create a instance of the FelisShape or the subclass from a given shape's element
+            </summary>
+            <param name="_shapeElement"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.GetShapeClassAttribute(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Get the description attribute by the special shape's element
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShape.GetShapeClassAttribute(System.Type)">
+            <summary>
+            Get the description attribute by the special class of the shape element
+            </summary>
+            <param name="_type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisShapeClassAttribute">
+            <summary>
+            The description attribute of a shape class
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisShapeGroup">
+            <summary>
+            The group shape
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeGroup.GetPropertiesElement(System.Boolean)">
+            <summary>
+            Get the properties element of the shape
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShapeGroup.HasShapes">
+            <summary>
+            Check if there is any shape in the group
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisShapeGroup.Shapes">
+            <summary>
+            Get an iterator of the shapes in the group
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeGroup.CheckHasShapes(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Check is there is any shape in the special element
+            </summary>
+            <param name="_element">The element which may contain some shapes</param>
+            <returns>The result is true if there is any shape inside the given element.</returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeGroup.GetChildrenShapes(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Get an iterator of the shapes inside the given element
+            </summary>
+            <param name="_element">The element which may contain some shapes</param>
+            <returns>The iterator of the shapes inside the given element</returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTable">
+            <summary>
+            The table shape
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisTable.TableElement">
+            <summary>
+            The element of the table data
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTable.#ctor(DocumentFormat.OpenXml.Presentation.GraphicFrame)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element"></param>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisTable.TableProperties">
+            <summary>
+            The properties of the table
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisTable.RowsCollection">
+            <summary>
+            The collection of the rows
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.Rows">
+            <summary>
+            Get the rows in the table
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.ColumnsCount">
+            <summary>
+            Get the count of the columns in the table
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTable.Cell(System.Int32,System.Int32)">
+            <summary>
+            Get a special cell by the coordinate
+            </summary>
+            <param name="_row">The row index of the cell</param>
+            <param name="_col">The column index of the cell</param>
+            <returns></returns>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkBandRow">
+            <summary>
+            The marker of the band row
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkBandColumn">
+            <summary>
+            The marker of the band column
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkFirstRow">
+            <summary>
+            The marker of the first row
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkFirstColumn">
+            <summary>
+            The marker of the first column
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkLastRow">
+            <summary>
+            The marker of the last row
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.MarkLastColumn">
+            <summary>
+            The marker of th last column
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTable.RightToLeft">
+            <summary>
+            Indicate if the table is right-to-left style
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTable.GetTableInnerProperties``1(DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Get the properties element of the table's content
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTableRow">
+            <summary>
+            The table row class
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisTableRow.cellsCollection">
+            <summary>
+            the cache of the collection of the cell
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableRow.Cells">
+            <summary>
+            Get the cells in the row
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTableRowCollection">
+            <summary>
+            The collection of the row
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableRowCollection.CreateElement(System.Int32)">
+            <summary>
+            Create an empty row element
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableRowCollection.BoxingElement(DocumentFormat.OpenXml.Drawing.TableRow)">
+            <summary>
+            Boxing the row element
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableRowCollection.UnboxingElement(FelisOpenXml.FelisShape.FelisTableRow)">
+            <summary>
+            Unboxing the row object
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTableCellCollection">
+            <summary>
+            The collection of the cell
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableCellCollection.CreateElement(System.Int32)">
+            <summary>
+            Create an empty cell element
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableCellCollection.BoxingElement(DocumentFormat.OpenXml.Drawing.TableCell)">
+            <summary>
+            Boxing the cell element
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTableCellCollection.UnboxingElement(FelisOpenXml.FelisShape.FelisTableCell)">
+            <summary>
+            Unboxing the cell object
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTableCell">
+            <summary>
+            The table cell class
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.HasTextContent">
+            <summary>
+            Check if the cell contains text content
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.TextBody">
+            <summary>
+            Get the text body in the cell
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.MergeRows">
+            <summary>
+            The count of the rows this cell merges
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.MergeColumns">
+            <summary>
+            The count of the columns this cell merges
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.IsMergeMaster">
+            <summary>
+            Check if this cell is the master of the merged cells
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.IsMergedByRow">
+            <summary>
+            Check if this cell is merged by others in row
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.IsMergedByColumn">
+            <summary>
+            Check if this cell is merged by others in column
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTableCell.IsMerged">
+            <summary>
+            Check if this cell is merged by others
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.IFelisShapeTree">
+            <summary>
+            The interface of the tree containing the shapes
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.IFelisShapeTree.HasShapes">
+            <summary>
+            Check if there is any shape in the tree
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.IFelisShapeTree.Shapes">
+            <summary>
+            Get an iterator of the shapes in the tree
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisShapeTreeExtension">
+            <summary>
+            The collection of the externel method of the IFelisShapeTree
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeTreeExtension.GetShapeById(FelisOpenXml.FelisShape.IFelisShapeTree,System.UInt32,System.Boolean)">
+            <summary>
+            Get a shape have the special ID
+            </summary>
+            <param name="_tree">The instance of IFelisShapeTree</param>
+            <param name="_id">The ID of the target shape</param>
+            <param name="_deep">True for searching the subtree in the shapes. The default value is false.</param>
+            <returns>The target shape</returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeTreeExtension.GetShapes``1(FelisOpenXml.FelisShape.IFelisShapeTree,System.Boolean)">
+            <summary>
+            Get the shape with special type
+            </summary>
+            <typeparam name="T">The type of the target shape</typeparam>
+            <param name="_tree">The shapes tree</param>
+            <param name="_deep">True for searching the subtree in the shapes. The default value is false.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisShapeTreeExtension.GetFirstShape``1(FelisOpenXml.FelisShape.IFelisShapeTree,System.Boolean)">
+            <summary>
+            Get the first shape with the special type
+            </summary>
+            <typeparam name="T">The special type of the target shape</typeparam>
+            <param name="_tree">The shapes tree</param>
+            <param name="_deep">True for searching the subtree in the shapes. The default value is false.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextBody">
+            <summary>
+            The class of the body of the text
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Text.FelisTextBody.paragraphsCollection">
+            <summary>
+            The cache of the paragraphs
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextBody.Paragraphs">
+            <summary>
+            Get an iterator of all the paragraphs inside the text body
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextBody.Text">
+            <summary>
+            The text content inside the text body
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextBody.FirstTextProperties">
+            <summary>
+            Get the first defined properties of text in the body.
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextParagraph">
+            <summary>
+            The class of the paragraph
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Text.FelisTextParagraph.runsCollection">
+            <summary>
+            The cache of the runs
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.TextRuns">
+            <summary>
+            The collection of the run is the paragraph
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.Text">
+            <summary>
+            The text content in the paragraph
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.FirstTextProperties">
+            <summary>
+            Get the first defined properties of text in the paragraph. An empty one will be created if there is not an existed one.
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraph.GetFelisTextProperties(System.Boolean)">
+            <summary>
+            Get the first defined properties of text in the paragraph
+            </summary>
+            <param name="_forceOne"></param>
+            <returns></returns>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.Properties">
+            <summary>
+            The properties of the paragraph
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.PropertiesSafe">
+            <summary>
+            The properties of the paragraph.
+            An empty one will be create if there is no existed on.
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextParagraph.ParagraphTextProperties">
+            <summary>
+            Get the properties of text defined as the level as the paragraph
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraph.GetFirstTextProperties(DocumentFormat.OpenXml.Drawing.Paragraph,System.Boolean)">
+            <summary>
+            Get the first defined properties of text in the given paragraph
+            </summary>
+            <param name="_paragraphElement">The element of the special paragraph</param>
+            <param name="_forceOne">Set true for creating an empty one if there is not an existed properties in the given paragraph.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextParagraphCollection">
+            <summary>
+            Collection of the paragraphs
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraphCollection.#ctor(DocumentFormat.OpenXml.OpenXmlCompositeElement)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_container"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraphCollection.BoxingElement(DocumentFormat.OpenXml.Drawing.Paragraph)">
+            <summary>
+            Boxing
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraphCollection.CreateElement(System.Int32)">
+            <summary>
+            Create paragraph
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextParagraphCollection.UnboxingElement(FelisOpenXml.FelisShape.Text.FelisTextParagraph)">
+            <summary>
+            Unboxing
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextProperties">
+            <summary>
+            The class of the properties of the text
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.Text.FelisTextProperties.ParentElement">
+            <summary>
+            The parent element
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.#ctor(DocumentFormat.OpenXml.Drawing.TextCharacterPropertiesType,DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Create an instance assigned to a special text's properties
+            </summary>
+            <param name="_element">The element of the special text's properties</param>
+            <param name="_parentElement">The parant the text's properties belonged to.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.Submit">
+            <summary>
+            Submit the changing in the properties. 
+            This method is only used when the properties object is created in runing time.
+            The changing will be submitted immediately if the properties is already existed in the DOM tree of the parent element.
+            </summary>
+            <returns>True for success. False for fail. If the properties is not assigned to a parent the method will be fail.</returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.CopyFrom(FelisOpenXml.FelisShape.Text.FelisTextProperties,System.Boolean)">
+            <summary>
+            Copy the properies from a given object
+            </summary>
+            <param name="_sourceProps">The source object containing the properties should be copied.</param>
+            <param name="_isPure">Set true for clearing all existed defined properties in the target object before copy.</param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.FontSize">
+            <summary>
+            The size property of the font
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Language">
+            <summary>
+            The language property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.AlternativeLanguage">
+            <summary>
+            The alternative language property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Bold">
+            <summary>
+            The bold property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Italic">
+            <summary>
+            The italic  property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Underline">
+            <summary>
+            The underline  property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Baseline">
+            <summary>
+            The baseline property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Capital">
+            <summary>
+            The capital style property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Kerning">
+            <summary>
+            The baseline property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.NormalizeHeight">
+            <summary>
+            The normalize height property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Spacing">
+            <summary>
+            The spacing property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Strike">
+            <summary>
+            The strike style property
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.FontFamilies">
+            <summary>
+            Get an iterator of all the font families' names
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.SetFontFamily(System.String,System.String[])">
+            <summary>
+            Set the special font type to use the special font family.
+            The latin and east asian font will be set if there is not any font type specialized.
+            </summary>
+            <param name="_familyName">The special font family</param>
+            <param name="_fontTypes">The list of the font types wanna be set.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.SetFontFamilyAsTheme(System.Boolean,System.String[])">
+            <summary>
+            Set the special font type to keep the same as the theme.
+            The latin and east asian font will be set if there is not any font type specialized.
+            </summary>
+            <param name="_asMajor">True to set as the major text, False to set as the minor text.</param>
+            <param name="_fontTypes">The list of the font types wanna be set.</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.GetFontFamily(System.String)">
+            <summary>
+            Get the font family used by the special font type
+            </summary>
+            <param name="_fontType">The special font type</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.RemoveFontFamily(System.String)">
+            <summary>
+            Remove the special font type declaretion
+            </summary>
+            <param name="_fontType">The special font type</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.GetNormalizeFontFamily(DocumentFormat.OpenXml.Drawing.TextFontType)">
+            <summary>
+            Get the font family as the normalized value
+            </summary>
+            <param name="_fontElement">The font element containing the font family name</param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.GetFontTypeAbbreviation(DocumentFormat.OpenXml.Drawing.TextFontType)">
+            <summary>
+            Get the abbreviation of the font type
+            </summary>
+            <param name="_fontType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.NormalizeFontFamily(System.String@,System.String,System.String,DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Normalize the font family
+            </summary>
+            <param name="_family">The family wanna be normalized</param>
+            <param name="_lang">The language of the text</param>
+            <param name="_altLang">The alternative language of the text</param>
+            <param name="_belongElement">The element containing this font declaretion. This argument is used to locate the scheme</param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextProperties.GetFontFamilyFromCollection(DocumentFormat.OpenXml.Drawing.FontCollectionType,System.String,System.String,System.String)">
+            <summary>
+            Get the font family of the special font's type from a collection
+            </summary>
+            <param name="_fonts">The collection containing the fonts</param>
+            <param name="_lang">The language of the text</param>
+            <param name="_altLang">The alternative language of the text</param>
+            <param name="_fontType">The special font's type</param>
+            <returns></returns>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextProperties.Color">
+            <summary>
+            The color of the foreground
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextRun">
+            <summary>
+            The class of the portion of the text
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextRun.Text">
+            <summary>
+            The text contained in the run
+            </summary>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.Text.FelisTextRun.Properties">
+            <summary>
+            Get the properties of the text
+            </summary>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.Text.FelisTextRunCollection">
+            <summary>
+            Collection of the run
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextRunCollection.#ctor(DocumentFormat.OpenXml.Drawing.Paragraph)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_container"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextRunCollection.BoxingElement(DocumentFormat.OpenXml.Drawing.Run)">
+            <summary>
+            Boxing
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextRunCollection.CreateElement(System.Int32)">
+            <summary>
+            Create a new run
+            </summary>
+            <param name="_index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.Text.FelisTextRunCollection.UnboxingElement(FelisOpenXml.FelisShape.Text.FelisTextRun)">
+            <summary>
+            Unboxing
+            </summary>
+            <param name="_element"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FelisOpenXml.FelisShape.FelisTextParagraphProperties">
+            <summary>
+            The properties for paragraph
+            </summary>
+        </member>
+        <member name="F:FelisOpenXml.FelisShape.FelisTextParagraphProperties.ParentElement">
+            <summary>
+            The element of the parent
+            </summary>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTextParagraphProperties.#ctor(DocumentFormat.OpenXml.Drawing.TextParagraphPropertiesType,DocumentFormat.OpenXml.OpenXmlElement)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="_element"></param>
+            <param name="_parentElement"></param>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTextParagraphProperties.Submit">
+            <summary>
+            Submit the changing of the properties
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FelisOpenXml.FelisShape.FelisTextParagraphProperties.CopyFrom(FelisOpenXml.FelisShape.FelisTextParagraphProperties,System.Boolean)">
+            <summary>
+            Copy the properties from an other one
+            </summary>
+            <param name="_sourceProps"></param>
+            <param name="_isPure"></param>
+        </member>
+        <member name="P:FelisOpenXml.FelisShape.FelisTextParagraphProperties.Alignment">
+            <summary>
+            The alignment
+            </summary>
+        </member>
+    </members>
+</doc>

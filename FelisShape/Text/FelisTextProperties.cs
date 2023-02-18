@@ -641,7 +641,7 @@ namespace FelisOpenXml.FelisShape.Text
         /// </summary>
         public FelisColor? Color => FelisColor.Create(Element.GetFirstChild<A.SolidFill>() ?? new A.SolidFill(), obj =>
         {
-            if ((obj is FelisColor color) && (null == color.ContainerElement))
+            if ((obj is FelisColor color) && (null != color.ContainerElement) && (null == color.ContainerElement.Parent))
             {
                 Element.AppendChild(color.ContainerElement);
             }

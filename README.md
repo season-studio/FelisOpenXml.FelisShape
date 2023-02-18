@@ -1,6 +1,6 @@
 ﻿# FelisShape
 
-FelisShape is a .NET library for manipulating the presentations which conform to the Office Open XML File Formats specification. It is a cross-platform library base on the Open XML SDK. 
+FelisShape is a .NET library for manipulating the presentations which conform to the Office Open XML File Formats specification. It is a platform-independent library base on the Open XML SDK. 
 
 ## Installation
 ```
@@ -146,7 +146,7 @@ fill.Color.Value = Color.FromArgb(255, 0, 0);
 shape.Fill = fill;
 ```
 
-### See the API document for more information
+### See the [API document](./Doc/Api.xml) for more information
 
 ------
 Season Studio Copyright(2023)

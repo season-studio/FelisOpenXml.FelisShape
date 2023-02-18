@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TestConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "Pressure",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}

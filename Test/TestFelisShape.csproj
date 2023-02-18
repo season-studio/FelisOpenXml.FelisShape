@@ -8,9 +8,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <None Remove="assets\cat.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FelisShape\FelisOpenXml.FelisShape.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\cat.png" />
   </ItemGroup>
 
 </Project>

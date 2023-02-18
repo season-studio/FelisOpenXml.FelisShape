@@ -24,6 +24,11 @@
     <Description>FelisShape is a .NET library for manipulating the presentations which conform to the Office Open XML File Formats specification. It is a cross-platform library base on the Open XML SDK. </Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageProjectUrl>https://github.com/season-studio/FelisOpenXml.FelisShape</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/season-studio/FelisOpenXml.FelisShape</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Office;Open XML;Presentation;Slide</PackageTags>
+    <DocumentationFile>$(SolutionDir)Doc\Api.xml</DocumentationFile>
   </PropertyGroup>
 	
   <ItemGroup>

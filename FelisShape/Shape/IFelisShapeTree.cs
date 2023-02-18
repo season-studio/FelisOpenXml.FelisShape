@@ -77,16 +77,16 @@ namespace FelisOpenXml.FelisShape
         /// <param name="_tree">The shapes tree</param>
         /// <param name="_deep">True for searching the subtree in the shapes. The default value is false.</param>
         /// <returns></returns>
-        public static IEnumerable<FelisShape> GetShapes<T>(this IFelisShapeTree? _tree, bool _deep = false)
+        public static IEnumerable<T> GetShapes<T>(this IFelisShapeTree? _tree, bool _deep = false)
             where T : FelisShape
         {
             if (null == _tree)
             {
-                return Array.Empty<FelisShape>();
+                return Array.Empty<T>();
             }
 
             bool hasGroup = false;
-            IEnumerable<FelisShape> topIterator;
+            IEnumerable<T> topIterator;
             if (typeof(T) == typeof(FelisShape))
             {
                 topIterator = _tree.Shapes.Where(e =>
@@ -96,7 +96,7 @@ namespace FelisOpenXml.FelisShape
                         hasGroup = true;
                     }
                     return e.GetType() == typeof(FelisShape);
-                });
+                }).Select(e => (e as T)!);
             }
             else
             {
@@ -107,7 +107,7 @@ namespace FelisOpenXml.FelisShape
                         hasGroup = true;
                     }
                     return e is T;
-                });
+                }).Select(e => (e as T)!);
             }
             if (hasGroup && _deep)
             {
@@ -127,7 +127,7 @@ namespace FelisOpenXml.FelisShape
         /// <param name="_tree">The shapes tree</param>
         /// <param name="_deep">True for searching the subtree in the shapes. The default value is false.</param>
         /// <returns></returns>
-        public static FelisShape? GetFirstShape<T>(this IFelisShapeTree? _tree, bool _deep = false)
+        public static T? GetFirstShape<T>(this IFelisShapeTree? _tree, bool _deep = false)
             where T : FelisShape
         {
             return GetShapes<T>(_tree, _deep).FirstOrDefault();
