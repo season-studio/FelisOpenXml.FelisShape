@@ -53,11 +53,11 @@ namespace FelisOpenXml.FelisShape.Text
                     {
                         if (Element is A.EndParagraphRunProperties)
                         {
-                            ParentElement.AppendChild(Element);
+                            ParentElement.InsertElement(Element);
                         }
                         else
                         {
-                            ParentElement.InsertAt(Element, 0);
+                            ParentElement.InsertElement(Element, 0);
                         }
                     }
 
@@ -433,7 +433,7 @@ namespace FelisOpenXml.FelisShape.Text
                         if (null != newFont)
                         {
                             newFont.Typeface = _familyName;
-                            Element.AppendChild(newFont);
+                            Element.AddChild(newFont, false);
                         }
                     }
                 }
@@ -480,7 +480,7 @@ namespace FelisOpenXml.FelisShape.Text
                     if (null != newFont)
                     {
                         newFont.Typeface = $"+{(_asMajor ? "mj" : "mn")}-{GetFontTypeAbbreviation(newFont)}";
-                        Element.AppendChild(newFont);
+                        Element.AddChild(newFont, false);
                     }
                 }
             }
@@ -643,7 +643,7 @@ namespace FelisOpenXml.FelisShape.Text
         {
             if ((obj is FelisColor color) && (null != color.ContainerElement) && (null == color.ContainerElement.Parent))
             {
-                Element.AppendChild(color.ContainerElement);
+                Element.AddChild(color.ContainerElement, false);
             }
         });
     }   

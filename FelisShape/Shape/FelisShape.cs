@@ -79,7 +79,7 @@ namespace FelisOpenXml.FelisShape
             var ret = Element.GetFirstChild<P.ShapeProperties>();
             if ((null == ret) && _forceOne)
             {
-                ret = Element.AppendChild(new P.ShapeProperties());
+                Element.AddChild(ret = new P.ShapeProperties(), false);
             }
             return ret;
         }
@@ -199,7 +199,7 @@ namespace FelisOpenXml.FelisShape
                     xfrm = new A.TransformGroup();
                     if (null == prop)
                     {
-                        prop = _element.InsertAt(new P.GroupShapeProperties(), 0);
+                        prop = _element.InsertElement(new P.GroupShapeProperties(), 0);
                     }
                     prop.TransformGroup = xfrm;
                 }
@@ -214,7 +214,7 @@ namespace FelisOpenXml.FelisShape
                     xfrm = new A.Transform2D();
                     if (null == prop)
                     {
-                        prop = _element.InsertAt(new P.ShapeProperties(), 0);
+                        prop = _element.InsertElement(new P.ShapeProperties(), 0);
                     }
                     prop.Transform2D = xfrm;
                 }
@@ -277,7 +277,7 @@ namespace FelisOpenXml.FelisShape
                         {
                             X = value.x,
                             Y = value.y
-                        });
+                        }, false);
                     }
                     else
                     {
@@ -291,7 +291,7 @@ namespace FelisOpenXml.FelisShape
                         {
                             Cx = value.cx,
                             Cy = value.cy,
-                        });
+                        }, false);
                     }
                     else
                     {

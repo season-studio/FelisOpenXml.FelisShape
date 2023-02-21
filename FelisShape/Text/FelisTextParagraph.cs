@@ -58,7 +58,7 @@ namespace FelisOpenXml.FelisShape.Text
                 }
                 else
                 {
-                    Element.AppendChild(run);
+                    Element.AddChild(run, false);
                 }
             }
         }

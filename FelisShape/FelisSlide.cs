@@ -138,7 +138,7 @@ namespace FelisOpenXml.FelisShape
                             }
                             else
                             {
-                                cList.InsertAt(custom, 0);
+                                cList.AddChild(custom, false);
                             }
                         }
                     }

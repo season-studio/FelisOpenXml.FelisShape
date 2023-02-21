@@ -16,7 +16,8 @@ using System.Reflection;
 using DocumentFormat.OpenXml.Wordprocessing;
 using FelisOpenXml.FelisShape.Base;
 using System.Xml.Linq;
-using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using System.Runtime.ConstrainedExecution;
 
 namespace FelisOpenXml.FelisShape
 {
@@ -48,7 +49,7 @@ namespace FelisOpenXml.FelisShape
             : base(_element)
         {
             var slidePart = FelisSlide.RetrospectToSlideElement(_element)?.SlidePart;
-            var chartRef = ForceGraphicData.GetFirstChild<C.ChartReference>() ?? ForceGraphicData.AppendChild(new C.ChartReference());
+            var chartRef = ForceGraphicData.GetFirstChild<C.ChartReference>() ?? ForceGraphicData.InsertElement(new C.ChartReference());
             if (null == slidePart)
             {
                 throw new OpenXmlPackageException("Can not locate the part of the slide.");
@@ -76,12 +77,12 @@ namespace FelisOpenXml.FelisShape
         /// <returns></returns>
         protected static OpenXmlCompositeElement ForceGetChartElement(C.ChartSpace _chartSpace)
         {
-            var chart = _chartSpace.GetFirstChild<C.Chart>() ?? _chartSpace.AppendChild(new C.Chart());
+            var chart = _chartSpace.GetFirstChild<C.Chart>() ?? _chartSpace.InsertElement(new C.Chart());
             var plotArea = chart.PlotArea ?? (chart.PlotArea = new C.PlotArea());
             var chartElement = plotArea.ChildElements.FirstOrDefault(e => e.LocalName.EndsWith("Chart", StringComparison.Ordinal) && (e is OpenXmlCompositeElement) && e.NamespaceUri == chart.NamespaceUri);
             if (null == chartElement)
             {
-                chartElement = plotArea.AppendChild(new C.BarChart());
+                plotArea.AddChild(chartElement = new C.BarChart(), false);
             }
             return (chartElement as OpenXmlCompositeElement)!;
         }
@@ -152,7 +153,7 @@ namespace FelisOpenXml.FelisShape
                             if (null == chartText)
                             {
                                 chartText = new C.ChartText();
-                                titleElement.InsertAt(chartText, 0);
+                                titleElement.AddChild(chartText, false);
                             }
                             richText = new C.RichText(
                                 new A.BodyProperties(),
@@ -165,7 +166,7 @@ namespace FelisOpenXml.FelisShape
                                     new A.EndParagraphRunProperties()
                                 )
                             );
-                            chartText.InsertAt(richText, 0);
+                            chartText.AddChild(richText, false);
                         }
                         else
                         {
@@ -195,9 +196,9 @@ namespace FelisOpenXml.FelisShape
                                     }
                                     if (firstRun)
                                     {
-                                        paragraph.AppendChild(new A.Run(
+                                        paragraph.AddChild(new A.Run(
                                                 new A.Text(value)
-                                            )
+                                            ), false
                                         );
                                     }
                                 }
@@ -208,7 +209,7 @@ namespace FelisOpenXml.FelisShape
                                             new A.Run(
                                                 new A.Text(value)
                                             )
-                                        )
+                                        ), false
                                     );
                                 }
                             }
@@ -223,6 +224,81 @@ namespace FelisOpenXml.FelisShape
         }
 
         /// <summary>
+        /// Remove the external workbook
+        /// </summary>
+        public void RemoveExternalWorkbook()
+        {
+            var extData = ChartSpace.GetFirstChild<C.ExternalData>();
+            if (null != extData) 
+            {
+                try
+                {
+                    if (ChartPart.TryGetPartById(extData.Id?.Value ?? String.Empty, out OpenXmlPart? part))
+                    {
+                        ChartPart.DeletePart(part);
+                    }
+                }
+                catch (Exception err)
+                {
+                    Trace.TraceWarning(err.ToString());
+                }
+                finally
+                {
+                    extData.Remove();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set the external workbook
+        /// </summary>
+        /// <param name="_source"></param>
+        /// <param name="_autoUpdate"></param>
+        public void SetExternalWorkBook(Stream _source, bool _autoUpdate = false)
+        {
+            var extPart = ChartPart.AddNewPart<EmbeddedPackagePart>("http://schemas.openxmlformats.org/officeDocument/2006/relationships/package", null!);
+            extPart.FeedData(_source);
+            var rid = ChartPart.GetIdOfPart(extPart);
+
+            var extData = ChartSpace.ForceGetChild<C.ExternalData>();
+            if (null != extData)
+            {
+                extData.Id = rid;
+                var updateNode = extData.ForceGetChild<C.AutoUpdate>();
+                if (null != updateNode)
+                {
+                    updateNode.Val = _autoUpdate;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Work with the content of the external workbook
+        /// </summary>
+        /// <param name="_fn"></param>
+        public void WorkWithExternalWorkbook(Action<Stream> _fn)
+        {
+            var extData = ChartSpace.GetFirstChild<C.ExternalData>();
+            if (null != extData)
+            {
+                try
+                {
+                    if (ChartPart.TryGetPartById(extData.Id?.Value ?? String.Empty, out OpenXmlPart? part))
+                    {
+                        using (var stream = part.GetStream())
+                        {
+                            _fn(stream);
+                        }
+                    }
+                }
+                catch (Exception err)
+                {
+                    Trace.TraceWarning(err.ToString());
+                }
+            }
+        }
+
+        /// <summary>
         /// Submit the changeing of the chart
         /// </summary>
         public void Submit()
@@ -231,282 +307,8 @@ namespace FelisOpenXml.FelisShape
         }
     }
 
-#if false
     /// <summary>
-    /// The class for operating the reference data
-    /// </summary>
-    /// <typeparam name="TRoot"></typeparam>
-    /// <typeparam name="TRef"></typeparam>
-    /// <typeparam name="TCache"></typeparam>
-    /// <typeparam name="TPoint"></typeparam>
-    public abstract class FelisDataReferenceContainer<TRoot, TRef, TCache, TPoint> : FelisCompositeElement
-        where TRoot : OpenXmlCompositeElement
-        where TRef : OpenXmlElement
-        where TCache : OpenXmlElement
-        where TPoint : OpenXmlElement, new()
-    {
-        private string?[]? valuesCache;
-
-        internal FelisDataReferenceContainer(TRoot _element)
-            : base(_element)
-        {
-            valuesCache = null;
-            ReloadCache();
-        }
-
-        /// <summary>
-        /// The container element
-        /// </summary>
-        protected TRoot ContainerElement => (Element as TRoot)!;
-
-        #region 关于引用位置的处理
-        /// <summary>
-        /// Get or set the reference of the data
-        /// </summary>
-        public (string? book, string? sheet, string start, string? end) DataReference
-        {
-            get
-            {
-                var formula = Element.Elements<TRef>().FirstOrDefault()?.Elements<C.Formula>().FirstOrDefault();
-                if (null != formula)
-                {
-                    var match = Regex.Match(formula.Text, @"'?(?:\[(.+)\])?([^!]+)'?!([^:]+)(?::([^:]+))?");
-                    return (book: match.Groups[1].Value, sheet: match.Groups[2].Value, start: match.Groups[3].Value, end: match.Groups[4].Value);
-                }
-                else
-                {
-                    return (book: null, sheet: string.Empty, start: string.Empty, end: string.Empty);
-                }
-            }
-            set
-            {
-                var refElement = Element.ForceGetChildOXmlElement<TRef>();
-                if (null != refElement)
-                {
-                    string refStr = (string.IsNullOrWhiteSpace(value.end) ? value.start : $"{value.start}:{value.end}").Trim();
-                    if (!string.IsNullOrEmpty(refStr))
-                    {
-                        var formula = refElement.ForceGetChildOXmlElement<C.Formula>();
-                        if (null != formula)
-                        {
-                            if (!string.IsNullOrWhiteSpace(value.sheet))
-                            {
-                                refStr = string.IsNullOrWhiteSpace(value.book) ? $"{value.sheet}!{refStr}" : $"\'[{value.book}]{value.sheet}\'!{refStr}";
-                            }
-                            formula.Text = refStr;
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Remove the reference of the data
-        /// </summary>
-        public void RemoveReference()
-        {
-            Element.Elements<TRef>().FirstOrDefault()?.RemoveAllChildren<C.Formula>();
-        }
-
-        /// <summary>
-        /// Set the reference to unknown
-        /// </summary>
-        /// <param name="_start">The loaction of the start data</param>
-        /// <param name="_end">The location of the end data</param>
-        public void SetUnknownReference(string _start, string _end)
-        {
-            DataReference = (book: "unknown", sheet: "unknown", start: _start, end: _end);
-        }
-        #endregion
-
-        #region 值缓冲的处理
-
-        /// <summary>
-        /// Get the values
-        /// </summary>
-        /// <returns></returns>
-        protected string?[] GetValues()
-        {
-            return Element.GetFirstChild<TRef>()?.GetFirstChild<TCache>()?.Elements<TPoint>()
-                            .OrderBy(e => e.GetDataPointIndex())
-                            .Select(e => e.GetFirstChild<C.NumericValue>()?.Text)
-                            .ToArray() ?? Array.Empty<string>();
-        }
-
-        /// <summary>
-        /// Reload the cache of the values
-        /// </summary>
-        protected void ReloadCache()
-        {
-            valuesCache = GetValues();
-        }
-
-        /// <summary>
-        /// Get the count of the values
-        /// </summary>
-        public int Count => valuesCache?.Length ?? 0;
-
-        /// <summary>
-        /// Get or set a value in special position
-        /// </summary>
-        /// <param name="_index"></param>
-        /// <returns></returns>
-        public object? this[int _index]
-        {
-            get
-            {
-                return _index >= 0 && _index < valuesCache?.Length ? valuesCache[_index] : null;
-            }
-            set
-            {
-                if (_index >= 0 && _index < valuesCache?.Length)
-                {
-                    string data = null != value ? value!.ToString()! : string.Empty;
-                    valuesCache[_index] = data;
-                    var valElement = Element.GetFirstChild<TRef>()?.GetFirstChild<TCache>()?.Elements<TPoint>().FirstOrDefault(e => e.GetDataPointIndex() == _index)?.GetFirstChild<C.NumericValue>();
-                    if (valElement != null)
-                    {
-                        valElement.Text = data;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Rewrite all the values. 
-        /// This method can change the count of the values
-        /// </summary>
-        /// <param name="_values"></param>
-        /// <returns></returns>
-        public TCache? ReWrite(IEnumerable<object> _values)
-        {
-            TCache? cache = null;
-            if (null != Element)
-            {
-                Element.RemoveAllChildren<C.NumberReference>();
-                Element.RemoveAllChildren<C.StringReference>();
-                cache = Element.ForceGetChildOXmlElement<TRef>()?.ForceGetChildOXmlElement<TCache>();
-                if (null != cache)
-                {
-                    cache.RemoveAllChildren<C.PointCount>();
-                    cache.RemoveAllChildren<TPoint>();
-                    uint index = 0;
-                    TPoint? firstPt = null;
-                    foreach (var item in _values)
-                    {
-                        string data = null == item ? string.Empty : item.ToString()!;
-                        var ptr = new TPoint();
-                        if (null == firstPt)
-                        {
-                            firstPt = ptr;
-                        }
-                        ptr.SetDataPointIndex(index++);
-                        ptr.InsertAt(new C.NumericValue(data), 0);
-                        cache.AppendChild(ptr);
-                    }
-                    if (null != firstPt)
-                    {
-                        cache.InsertBefore(new C.PointCount() { Val = index }, firstPt);
-                    }
-                    else
-                    {
-                        cache.InsertAt(new C.PointCount() { Val = index }, 0);
-                    }
-                }
-            }
-            ReloadCache();
-            return cache;
-        }
-
-        /// <summary>
-        /// Rewrite all the values. 
-        /// This method can change the count of the values
-        /// </summary>
-        /// <param name="_values"></param>
-        public void ReWrite(params object?[] _values)
-        {
-            ReWrite(_values as IEnumerable<object>);
-        }
-
-        /// <summary>
-        /// Get the values
-        /// </summary>
-        public object?[] Values => GetValues();
-        #endregion
-
-        #region 格式处理
-        /// <summary>
-        /// The default format of the value
-        /// </summary>
-        public static readonly string DefaultFormat = "General";
-
-        /// <summary>
-        /// Get or set the format of the value
-        /// </summary>
-        public string? Format
-        {
-            get
-            {
-                return Element.GetFirstChild<TRef>()?.GetFirstChild<TCache>()?.GetFirstChild<C.FormatCode>()?.Text;
-            }
-            set
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    var format = Element.ForceGetChildOXmlElement<TRef>()?.ForceGetChildOXmlElement<TCache>()?.ForceGetChildOXmlElement<C.FormatCode>();
-                    if (null != format)
-                    {
-                        format.Text = value;
-                    }
-                }
-            }
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// The class for operating the categories of the data
-    /// </summary>
-    public class FelisChartCategories : FelisDataReferenceContainer<C.CategoryAxisData, C.StringReference, C.StringCache, C.StringPoint>
-    {
-        internal FelisChartCategories(C.CategoryAxisData _element)
-            : base(_element)
-        {
-            ReloadCache();
-        }
-    }
-
-    /// <summary>
-    /// The class for operating the values of the data
-    /// </summary>
-    public class FelisChartValues : FelisDataReferenceContainer<C.Values, C.NumberReference, C.NumberingCache, C.NumericPoint>
-    {
-        internal FelisChartValues(C.Values _element)
-            : base(_element)
-        {
-            ReloadCache();
-        }
-
-        /// <summary>
-        /// Rewrite all the values
-        /// </summary>
-        /// <param name="_values"></param>
-        public new void ReWrite(IEnumerable<object> _values)
-        {
-            var cache = base.ReWrite(_values);
-            if (null != cache)
-            {
-                if (!cache.Elements<C.FormatCode>().Any())
-                {
-                    cache.InsertAt(new C.FormatCode(DefaultFormat), 0);
-                }
-            }
-        }
-    }
-#endif
-
-    /// <summary>
-    /// The class for operating the series of the data
+    /// The class for manipulating the series of the data
     /// </summary>
     public class FelisChartSeries : FelisCompositeElement
     {
@@ -518,11 +320,21 @@ namespace FelisOpenXml.FelisShape
         {
             categories = new Lazy<FelisChartCategories>(() =>
             {
-                return new FelisChartCategories(Element.GetFirstChild<C.CategoryAxisData>() ?? Element.InsertAt(new C.CategoryAxisData(), 0));
+                var ret = Element.GetFirstChild<C.CategoryAxisData>();
+                if (null == ret)
+                {
+                    Element.AddChild(ret = new C.CategoryAxisData(), false);
+                }
+                return new FelisChartCategories(ret);
             });
             values = new Lazy<FelisChartValues>(() =>
             {
-                return new FelisChartValues(Element.GetFirstChild<C.Values>() ?? Element.AppendChild(new C.Values()));
+                var ret = Element.GetFirstChild<C.Values>();
+                if (null == ret)
+                {
+                    Element.AddChild(ret = new C.Values(), false);
+                }
+                return new FelisChartValues(ret);
             });
         }
 
@@ -543,6 +355,39 @@ namespace FelisOpenXml.FelisShape
                     txtValue.Text = value ?? string.Empty;
                 }
             }
+        }
+
+        /// <summary>
+        /// Set the data reference of the series' title
+        /// </summary>
+        /// <param name="_book"></param>
+        /// <param name="_sheet"></param>
+        /// <param name="_cell"></param>
+        public void SetTitleReference(string? _book, string? _sheet, string _cell)
+        {
+            var refStr = _cell.Trim();
+            if (!string.IsNullOrEmpty(_cell))
+            {
+                var strRef = Element.GetFirstChild<C.SeriesText>()?.StringReference;
+                var formula = strRef?.ForceGetChild<C.Formula>(() => strRef.InsertElement(new C.Formula(), 0));
+                if (null != formula)
+                {
+                    if (!string.IsNullOrWhiteSpace(_sheet))
+                    {
+                        refStr = string.IsNullOrWhiteSpace(_book) ? $"{_sheet.Trim()}!{refStr}" : $"\'[{_book.Trim()}]{_sheet.Trim()}\'!{refStr}";
+                    }
+                    formula.Text = refStr;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Remove the reference setting of the title
+        /// </summary>
+        public void ClearTitleReference()
+        {
+            var formula = Element.GetFirstChild<C.SeriesText>()?.StringReference?.GetFirstChild<C.Formula>();
+            formula?.Remove();
         }
 
         /// <summary>
@@ -584,6 +429,7 @@ namespace FelisOpenXml.FelisShape
     public class FelisChartSeriesCollection : FelisModifiableCollection<OpenXmlCompositeElement, OpenXmlCompositeElement, FelisChartSeries>
     {
         private IReadOnlyList<OpenXmlCompositeElement?>? templateNodes = null;
+        private Type? placeSiblingNodeType = null;
 
         internal FelisChartSeriesCollection(OpenXmlCompositeElement _container) : base(_container)
         {
@@ -622,6 +468,11 @@ namespace FelisOpenXml.FelisShape
             {
                 indexElement.Val = (uint)_index;
             }
+            var orderElement = newNode.GetFirstChild<C.Order>();
+            if (null != orderElement)
+            {
+                orderElement.Val = (uint)_index;
+            }
             return newNode;
         }
 
@@ -642,19 +493,50 @@ namespace FelisOpenXml.FelisShape
         protected override IEnumerable<OpenXmlCompositeElement> GetElements()
         {
             List<OpenXmlCompositeElement?>? templates = ((null == templateNodes) ? new List<OpenXmlCompositeElement?>() : null);
+            OpenXmlElement? lastSibling = null;
             if (null != templates)
             {
                 templateNodes = templates;
             }
-            foreach (var item in ConrainerElement.Elements())
+            foreach (var item in ContainerElement.Elements())
             {
                 if ((item is OpenXmlCompositeElement serElement) && item.LocalName.Equals("ser", StringComparison.Ordinal))
                 {
                     if (null != templates)
                     {
                         templates.Add(serElement.CloneNode(true) as OpenXmlCompositeElement);
+                        lastSibling = serElement.NextSibling();
                     }
                     yield return serElement;
+                }
+            }
+
+            if (null != templates)
+            {
+                placeSiblingNodeType = lastSibling?.GetType();
+            }
+        }
+
+        /// <summary>
+        /// Add the first element into the container
+        /// </summary>
+        /// <param name="_newElement"></param>
+        protected override void PlaceFirstElement(OpenXmlElement _newElement)
+        {
+            if (null == placeSiblingNodeType)
+            {
+                ContainerElement.AddChild(_newElement, false);
+            }
+            else
+            {
+                var node = ContainerElement.GetFirstChild(e => placeSiblingNodeType.IsInstanceOfType(e));
+                if (null == node)
+                {
+                    ContainerElement.AddChild(_newElement, false);
+                }
+                else
+                {
+                    ContainerElement.InsertBefore(_newElement, node);
                 }
             }
         }
@@ -673,6 +555,11 @@ namespace FelisOpenXml.FelisShape
                 if (null != indexElement)
                 {
                     indexElement.Val = index;
+                }
+                var orderElement = ser.Element.GetFirstChild<C.Order>();
+                if (null != orderElement)
+                {
+                    orderElement.Val = index;
                 }
                 index++;
             }
@@ -846,7 +733,7 @@ namespace FelisOpenXml.FelisShape
                 }
                 else
                 {
-                    cache.InsertAt(new C.PointCount() { Val = index }, 0);
+                    cache.InsertElement(new C.PointCount() { Val = index }, 0);
                 }
             }
 
@@ -890,7 +777,7 @@ namespace FelisOpenXml.FelisShape
                         var fmtCode = cache.GetFirstChild<C.FormatCode>();
                         if (null == fmtCode)
                         {
-                            fmtCode = cache.InsertAt(new C.FormatCode(), 0);
+                            fmtCode = cache.InsertElement(new C.FormatCode(), 0);
                         }
                         if (null != fmtCode)
                         {
@@ -923,21 +810,17 @@ namespace FelisOpenXml.FelisShape
             }
             set
             {
-                var refElement = ReferenceElement.GetFirstChild<C.Formula>() ?? ReferenceElement.InsertAt(new C.Formula(), 0);
-                if (null != refElement)
+                string refStr = (string.IsNullOrWhiteSpace(value.end) ? value.start : $"{value.start}:{value.end}").Trim();
+                if (!string.IsNullOrEmpty(refStr))
                 {
-                    string refStr = (string.IsNullOrWhiteSpace(value.end) ? value.start : $"{value.start}:{value.end}").Trim();
-                    if (!string.IsNullOrEmpty(refStr))
+                    var formula = ReferenceElement.ForceGetChild<C.Formula>(() => ReferenceElement.InsertElement(new C.Formula(), 0));
+                    if (null != formula)
                     {
-                        var formula = refElement.GetFirstChild<C.Formula>() ?? refElement.InsertAt(new C.Formula(), 0);
-                        if (null != formula)
+                        if (!string.IsNullOrWhiteSpace(value.sheet))
                         {
-                            if (!string.IsNullOrWhiteSpace(value.sheet))
-                            {
-                                refStr = string.IsNullOrWhiteSpace(value.book) ? $"{value.sheet}!{refStr}" : $"\'[{value.book}]{value.sheet}\'!{refStr}";
-                            }
-                            formula.Text = refStr;
+                            refStr = string.IsNullOrWhiteSpace(value.book) ? $"{value.sheet}!{refStr}" : $"\'[{value.book}]{value.sheet}\'!{refStr}";
                         }
+                        formula.Text = refStr;
                     }
                 }
             }
@@ -984,7 +867,7 @@ namespace FelisOpenXml.FelisShape
             {
                 if (!cache.Elements<C.FormatCode>().Any())
                 {
-                    cache.InsertAt(new C.FormatCode(DefaultFormat), 0);
+                    cache.InsertElement(new C.FormatCode(DefaultFormat), 0);
                 }
             }
             return cache;
@@ -1071,7 +954,7 @@ namespace FelisOpenXml.FelisShape
         public readonly C.Values ValuesElement;
 
         internal FelisChartValues(C.Values _valsElement)
-            : base(_valsElement.GetFirstChild<C.NumberReference>() ?? _valsElement.InsertAt(new C.NumberReference(), 0))
+            : base(_valsElement.GetFirstChild<C.NumberReference>() ?? _valsElement.InsertElement(new C.NumberReference(), 0))
         {
             ValuesElement = _valsElement;
         }
@@ -1103,7 +986,7 @@ namespace FelisOpenXml.FelisShape
                 return new FelisChartNumberReference(numRef);
             }
 
-            var strRef = CategoryElement.GetFirstChild<C.StringReference>() ?? CategoryElement.InsertAt(new C.StringReference(), 0);
+            var strRef = CategoryElement.GetFirstChild<C.StringReference>() ?? CategoryElement.InsertElement(new C.StringReference(), 0);
             return new FelisChartStringReference(strRef);
         }
 

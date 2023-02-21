@@ -9,7 +9,7 @@
 		<Authors>Season Studio</Authors>
 		<Copyright>Season Studio 2023. All Rights Reserved.</Copyright>
 		<Product>$(SolutionName)</Product>
-		<VersionPrefix>0.5.7</VersionPrefix>
+		<VersionPrefix>0.5.8</VersionPrefix>
 	</PropertyGroup>
 	
   <PropertyGroup>
@@ -36,6 +36,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+	  <None Include="..\CHANGELOG.md" Link="CHANGELOG.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+	  </None>
   </ItemGroup>
 	
   <ItemGroup>

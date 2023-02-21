@@ -65,10 +65,10 @@ namespace FelisOpenXml.FelisShape.Draw
                 }
                 else
                 {
-                    Element.AppendChild(new A.RgbColorModelHex()
+                    Element.AddChild(new A.RgbColorModelHex()
                     {
                         Val = $"{value.R.ToString("X2")}{value.G.ToString("X2")}{value.B.ToString("X2")}"
-                    });
+                    }, false);
                 }
                 Submit();
             }
@@ -95,12 +95,12 @@ namespace FelisOpenXml.FelisShape.Draw
             }
             else
             {
-                Element.AppendChild(new A.HslColor()
+                Element.AddChild(new A.HslColor()
                 {
                     HueValue = _h,
                     SatValue = _s,
                     LumValue = _l
-                });
+                }, false);
             }
             Submit();
         }
@@ -122,10 +122,10 @@ namespace FelisOpenXml.FelisShape.Draw
             }
             else
             {
-                Element.AppendChild(new A.SchemeColor()
+                Element.AddChild(new A.SchemeColor()
                 {
                     Val = _color
-                });
+                }, false);
             }
             Submit();
         }

@@ -32,7 +32,7 @@ namespace FelisOpenXml.FelisShape
             var ret = Element.GetFirstChild<P.GroupShapeProperties>();
             if ((null == ret) && _forceOne)
             {
-                ret = Element.AppendChild(new P.GroupShapeProperties());
+                Element.AddChild(ret = new P.GroupShapeProperties(), false);
             }
             return ret;
         }

@@ -23,7 +23,11 @@ namespace FelisOpenXml.FelisShape
         internal FelisPicture(P.Picture _element)
             : base(_element)
         {
-            var blipElement = _element.GetFirstChild<P.BlipFill>() ?? _element.AppendChild(new P.BlipFill());
+            var blipElement = _element.GetFirstChild<P.BlipFill>();
+            if (null == blipElement)
+            {
+                _element.AddChild(blipElement = new P.BlipFill(), false);
+            }
             Blip = new FelisPictureBlip(blipElement);
         }
 

@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Office2010.CustomUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,43 +81,41 @@ namespace FelisOpenXml.FelisShape
         public static IEnumerable<T> GetShapes<T>(this IFelisShapeTree? _tree, bool _deep = false)
             where T : FelisShape
         {
-            if (null == _tree)
+            if (null != _tree)
             {
-                return Array.Empty<T>();
-            }
+                IEnumerable<IFelisShapeTree> groupSet = Array.Empty<IFelisShapeTree>();
+                foreach (var shape in _tree.Shapes)
+                {
+                    if (shape is IFelisShapeTree subTree)
+                    {
+                        if (_deep)
+                        {
+                            groupSet = groupSet.Append(subTree);
+                        }
+                    }
+                    else if (typeof(T) == typeof(FelisShape))
+                    {
+                        if (shape.GetType() == typeof(FelisShape))
+                        {
+                            yield return (shape as T)!;
+                        }
+                    }
+                    else if (shape is T shapeT)
+                    {
+                        yield return shapeT;
+                    }
+                }
 
-            bool hasGroup = false;
-            IEnumerable<T> topIterator;
-            if (typeof(T) == typeof(FelisShape))
-            {
-                topIterator = _tree.Shapes.Where(e =>
+                if (_deep && groupSet.Any())
                 {
-                    if (e is IFelisShapeTree)
+                    foreach (var subTree in groupSet)
                     {
-                        hasGroup = true;
+                        foreach (var shape in GetShapes<T>(subTree, _deep))
+                        {
+                            yield return shape;
+                        }
                     }
-                    return e.GetType() == typeof(FelisShape);
-                }).Select(e => (e as T)!);
-            }
-            else
-            {
-                topIterator = _tree.Shapes.Where(e =>
-                {
-                    if (e is IFelisShapeTree)
-                    {
-                        hasGroup = true;
-                    }
-                    return e is T;
-                }).Select(e => (e as T)!);
-            }
-            if (hasGroup && _deep)
-            {
-                var subIterator = _tree.Shapes.Where(e => e is IFelisShapeTree).SelectMany(e => GetShapes<T>(e as IFelisShapeTree, _deep));
-                return topIterator.Concat(subIterator);
-            }
-            else
-            {
-                return topIterator;
+                }
             }
         }
 
@@ -130,7 +129,8 @@ namespace FelisOpenXml.FelisShape
         public static T? GetFirstShape<T>(this IFelisShapeTree? _tree, bool _deep = false)
             where T : FelisShape
         {
-            return GetShapes<T>(_tree, _deep).FirstOrDefault();
+            var r = GetShapes<T>(_tree, _deep);
+            return r.FirstOrDefault();
         }
     }
 }

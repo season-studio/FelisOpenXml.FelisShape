@@ -52,7 +52,7 @@ namespace FelisOpenXml.FelisShape.Draw
                     if (workElement is not A.NoFill)
                     {
                         workElement?.Remove();
-                        ContainerElement.AppendChild(new A.NoFill());
+                        ContainerElement.AddChild(new A.NoFill(), false);
                     }
                 }
                 else
@@ -72,7 +72,7 @@ namespace FelisOpenXml.FelisShape.Draw
                     }
                     else if (null != value.Element)
                     {
-                        ContainerElement.AppendChild(value.Element.Parent == null ? value.Element : value.Element.CloneNode(true));
+                        ContainerElement.AddChild(value.Element.Parent == null ? value.Element : value.Element.CloneNode(true), false);
                     }
                 }
                 Submit();

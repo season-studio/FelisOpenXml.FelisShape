@@ -45,7 +45,7 @@ namespace FelisOpenXml.FelisShape
                 {
                     if (!ParentElement.Contains(Element))
                     {
-                        ParentElement.InsertAt(Element, 0);
+                        ParentElement.InsertElement(Element, 0);
                     }
 
                     return true;

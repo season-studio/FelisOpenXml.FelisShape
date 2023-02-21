@@ -34,12 +34,12 @@ namespace FelisOpenXml.FelisShape.Draw
                 var stretch = Element.GetFirstChild<A.Stretch>();
                 if (null == stretch)
                 {
-                    stretch = Element.AppendChild(new A.Stretch());
+                    Element.AddChild(stretch = new A.Stretch(), false);
                 }
                 var rect = stretch.GetFirstChild<A.FillRectangle>();
                 if (null == rect)
                 {
-                    rect = stretch.AppendChild(new A.FillRectangle());
+                    stretch.AddChild(rect = new A.FillRectangle(), false);
                 }
                 return rect;
             }
@@ -49,7 +49,12 @@ namespace FelisOpenXml.FelisShape.Draw
         {
             get
             {
-                return Element.GetFirstChild<A.SourceRectangle>() ?? Element.AppendChild(new A.SourceRectangle());
+                var ret = Element.GetFirstChild<A.SourceRectangle>();
+                if (null == ret)
+                {
+                    Element.AddChild(ret = new A.SourceRectangle(), false);
+                }
+                return  ret;
             }
         }
 
@@ -102,7 +107,7 @@ namespace FelisOpenXml.FelisShape.Draw
             var blip = Element.GetFirstChild<A.Blip>();
             if (null == blip)
             {
-                blip = Element.InsertAt(new A.Blip(), 0);
+                Element.AddChild(blip = new A.Blip(), false);
             }
 
             string? resId = blip.Embed;
@@ -152,7 +157,7 @@ namespace FelisOpenXml.FelisShape.Draw
     }
 
     /// <summary>
-    /// The class for operating the relative displacement
+    /// The class for manipulating the relative displacement
     /// </summary>
     public class FelisRelativeRect<T>
         where T : A.RelativeRectangleType
@@ -269,7 +274,7 @@ namespace FelisOpenXml.FelisShape.Draw
 
         /// <summary>
         /// Remove the element from it's parent.
-        /// This is a danger operating. After invoking this method, all the changing of the displacement have no effect in the shape.
+        /// This is a danger manipulation. After invoking this method, all the changing of the displacement have no effect in the shape.
         /// </summary>
         public void Delete()
         {

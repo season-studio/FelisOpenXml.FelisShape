@@ -32,7 +32,7 @@ namespace FelisOpenXml.FelisShape
             var table = ForceGraphicData.GetFirstChild<A.Table>();
             if (null == table)
             {
-                table = ForceGraphicData.AppendChild(new A.Table());
+                ForceGraphicData.AddChild(table = new A.Table(), false);
             }
             TableElement = table;
             TableProperties = new Lazy<A.TableProperties>(() => GetTableInnerProperties<A.TableProperties>(TableElement));
@@ -150,7 +150,7 @@ namespace FelisOpenXml.FelisShape
             if (null == props)
             {
                 props = new T();
-                _element.AppendChild(props);
+                _element.InsertElement(props);
             }
             return props;
         }

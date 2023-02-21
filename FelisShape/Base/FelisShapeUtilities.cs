@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using DocumentFormat.OpenXml.Validation;
 
 namespace FelisOpenXml.FelisShape
 {   
@@ -107,14 +108,14 @@ namespace FelisOpenXml.FelisShape
     /// <typeparam name="TElement">The type of the children element</typeparam>
     /// <typeparam name="TBoxedElement">The type of the children element in the collection, which box the TElement</typeparam>
     public abstract class FelisModifiableCollection<TContainer, TElement, TBoxedElement> : IEnumerable<TBoxedElement>
-        where TContainer : OpenXmlElement
+        where TContainer : OpenXmlCompositeElement
         where TElement : OpenXmlElement
         where TBoxedElement : class
     {
         /// <summary>
         /// The container element of the items in the collection
         /// </summary>
-        protected readonly TContainer ConrainerElement;
+        protected readonly TContainer ContainerElement;
         /// <summary>
         /// The cache of the collection
         /// </summary>
@@ -122,7 +123,7 @@ namespace FelisOpenXml.FelisShape
 
         internal FelisModifiableCollection(TContainer _container)
         {
-            ConrainerElement = _container;
+            ContainerElement = _container;
             collection = new Lazy<TBoxedElement[]>(Array.Empty<TBoxedElement>());
             Reload();
         }
@@ -153,7 +154,7 @@ namespace FelisOpenXml.FelisShape
             int oriCount = collection.Value.Length;
             if (oriCount == 0)
             {
-                ConrainerElement.AppendChild(CreateElement(0));
+                PlaceFirstElement(CreateElement(0));
                 realPos = 0;
             }
             else
@@ -162,13 +163,13 @@ namespace FelisOpenXml.FelisShape
                 if (realPos < oriCount)
                 {
                     var refRow = collection.Value[realPos];
-                    ConrainerElement.InsertBefore(CreateElement(realPos), UnboxingElement(refRow));
+                    ContainerElement.InsertBefore(CreateElement(realPos), UnboxingElement(refRow));
                     ResetIndexOfElements(collection.Value.Skip(realPos), realPos + 1);
                 }
                 else
                 {
                     var refRow = collection.Value[oriCount - 1];
-                    ConrainerElement.InsertAfter(CreateElement(realPos), UnboxingElement(refRow));
+                    ContainerElement.InsertAfter(CreateElement(realPos), UnboxingElement(refRow));
                 }
             }
             Reload();
@@ -232,7 +233,7 @@ namespace FelisOpenXml.FelisShape
         /// <returns></returns>
         protected virtual IEnumerable<TElement> GetElements()
         {
-            return ConrainerElement.Elements<TElement>();
+            return ContainerElement.Elements<TElement>();
         }
 
         /// <summary>
@@ -242,6 +243,15 @@ namespace FelisOpenXml.FelisShape
         /// <param name="_startIndex">The index of the first item in the list</param>
         protected virtual void ResetIndexOfElements(IEnumerable<TBoxedElement> _list, int _startIndex)
         { 
+        }
+
+        /// <summary>
+        /// Add the first element into the container
+        /// </summary>
+        /// <param name="_newElement"></param>
+        protected virtual void PlaceFirstElement(OpenXmlElement _newElement)
+        {
+            ContainerElement.AddChild(_newElement, false);
         }
 
         /// <summary>
@@ -289,7 +299,14 @@ namespace FelisOpenXml.FelisShape
                     target = _fnCreateor?.Invoke() ?? new T();
                     if ((null != target) && (null == target.Parent))
                     {
-                        _parent.AppendChild(target);
+                        if (_parent is OpenXmlCompositeElement cElement)
+                        {
+                            cElement.AddChild(target, false);
+                        }
+                        else
+                        {
+                            _parent.AppendChild(target);
+                        }
                     }
                 }
                 return target;
@@ -309,6 +326,17 @@ namespace FelisOpenXml.FelisShape
         }
 
         /// <summary>
+        /// Get the first child matched to the special type
+        /// </summary>
+        /// <param name="_element"></param>
+        /// <param name="_type"></param>
+        /// <returns></returns>
+        public static OpenXmlElement? GetFirstChild(this OpenXmlElement _element, Type _type)
+        {
+            return _element.ChildElements.FirstOrDefault(e => _type.IsInstanceOfType(e));
+        }
+
+        /// <summary>
         /// Get the children filtered by the checker
         /// </summary>
         /// <param name="_element"></param>
@@ -317,6 +345,17 @@ namespace FelisOpenXml.FelisShape
         public static IEnumerable<OpenXmlElement> Children(this OpenXmlElement _element, Func<OpenXmlElement, bool> _fnChecker)
         {
             return _element.ChildElements.Where(_fnChecker);
+        }
+
+        /// <summary>
+        /// Get the children matched to the special type
+        /// </summary>
+        /// <param name="_element"></param>
+        /// <param name="_type"></param>
+        /// <returns></returns>
+        public static IEnumerable<OpenXmlElement> Children(this OpenXmlElement _element, Type _type)
+        {
+            return _element.ChildElements.Where(e => _type.IsInstanceOfType(e));
         }
 
         /// <summary>
@@ -336,6 +375,190 @@ namespace FelisOpenXml.FelisShape
                 }
                 curChild = nextChild;
             }
+        }
+
+        /// <summary>
+        /// Remove all the children matched to the special type
+        /// </summary>
+        /// <param name="_element"></param>
+        /// <param name="_type"></param>
+        public static void RemoveAllChildren(this OpenXmlElement _element, Type _type)
+        {
+            var curChild = _element.FirstChild;
+            while (curChild != null)
+            {
+                var nextChild = curChild.NextSibling();
+                if (_type.IsInstanceOfType(curChild))
+                {
+                    _element.RemoveChild(curChild);
+                }
+                curChild = nextChild;
+            }
+        }
+
+        /// <summary>
+        /// Insert the element into a parent. This method will try the AddChild method if the parent is instance of OpenXmlCompositeElement
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="_parent"></param>
+        /// <param name="_subElement"></param>
+        /// <param name="_pos"></param>
+        /// <returns></returns>
+        public static T InsertElement<T>(this OpenXmlElement? _parent, T _subElement, int? _pos = null)
+            where T : OpenXmlElement
+        {
+            if (null != _parent)
+            {
+                if ((null != _subElement.Parent) && (_parent != _subElement.Parent))
+                {
+                    _subElement.Remove();
+                }
+
+                if (_parent is OpenXmlCompositeElement cElement)
+                {
+                    if (cElement.AddChild(_subElement, false))
+                    {
+                        return _subElement;
+                    }
+                }
+
+                if (_pos is null)
+                {
+                    _parent.AppendChild(_subElement);
+                }
+                else
+                {
+                    _parent.InsertAt(_subElement, _pos.Value);
+                }
+            }
+            return _subElement;
+        }
+
+        /// <summary>
+        /// The singleton instance of the validator
+        /// </summary>
+        private static OpenXmlValidator GlobalValidator = new OpenXmlValidator();
+
+        /// <summary>
+        /// Validate the element
+        /// </summary>
+        /// <param name="_element"></param>
+        /// <param name="_containParent"></param>
+        /// <returns></returns>
+        public static IEnumerable<ValidationErrorInfo> Validate(this OpenXmlElement? _element, bool _containParent)
+        {
+            if (null == _element)
+            {
+                return Enumerable.Empty<ValidationErrorInfo>();
+            }
+
+            var ret =  GlobalValidator.Validate(_element);
+            if (_containParent && (null != _element.Parent))
+            {
+                ret = _element.Parent.Validate(false).Concat(ret);
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Validate and try to fix the postion of the special element
+        /// </summary>
+        /// <param name="_element"></param>
+        /// <returns></returns>
+        public static bool ValidateThePosition(this OpenXmlElement? _element)
+        {
+            if (null == _element)
+            {
+                return false;
+            }
+
+            var parent = _element.Parent;
+            if (null == parent)
+            {
+                return false;
+            }
+
+            var filter = (ValidationErrorInfo info) => (info.RelatedNode == _element) && (info.ErrorType == ValidationErrorType.Schema);
+            var oriNext = _element.NextSibling();
+            OpenXmlElement? refPos;
+            do
+            {
+                if (!GlobalValidator.Validate(parent).Where(filter).Any())
+                {
+                    return true;
+                }
+                refPos = _element.PreviousSibling();
+                if (null != refPos)
+                {
+                    _element.Remove();
+                    parent.InsertBefore(_element, refPos);
+                }
+            } while (null != refPos);
+            refPos = oriNext;
+            while (null != refPos)
+            {
+                _element.Remove();
+                parent.InsertAfter(_element, refPos);
+                if (!GlobalValidator.Validate(parent).Where(filter).Any())
+                {
+                    return true;
+                }
+                refPos = _element.NextSibling();
+            }
+            _element.Remove();
+            if (null != oriNext)
+            {
+                parent.InsertBefore(_element, oriNext);
+            }
+            else
+            {
+                parent.AppendChild(_element);
+            }
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Parser for the index of the column's index in sheet
+    /// </summary>
+    public static class FelisSheetColumnAddressParser
+    {
+        /// <summary>
+        /// Convert index to address
+        /// </summary>
+        /// <param name="_index"></param>
+        /// <returns></returns>
+        public static string ToAddress(uint _index)
+        {
+            string ret = string.Empty;
+            byte[] buf = new byte[1];
+            var encoding = Encoding.ASCII;
+            for (; _index > 0; _index /= 26)
+            {
+                _index -= 1;
+                var mod = _index % 26;
+                buf[0] = (byte)('A' + mod);
+                ret = encoding.GetString(buf) + ret;
+            }
+            return ret;
+        }
+
+        /// <summary>
+        /// Convert address to index
+        /// </summary>
+        /// <param name="_addr"></param>
+        /// <returns></returns>
+        public static uint ToIndex(string _addr)
+        {
+            uint index = 0;
+            foreach(char c in _addr) 
+            {
+                index *= 26;
+                var mod = (uint)(c - 'A');
+                index += mod + 1;
+            }
+            return index;
         }
     }
 }
